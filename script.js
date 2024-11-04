@@ -39,19 +39,23 @@ function drawBoard() {
 
 function movePacman(direction) {
     const newPosition = { ...pacmanPosition };
+
     if (direction === 'ArrowUp') newPosition.y--;
     if (direction === 'ArrowDown') newPosition.y++;
     if (direction === 'ArrowLeft') newPosition.x--;
     if (direction === 'ArrowRight') newPosition.x++;
 
-    if (board[newPosition.y][newPosition.x] !== 1) {
+    // Verifica se a nova posição não é uma parede
+    if (board[newPosition.y] && board[newPosition.y][newPosition.x] !== 1) {
         pacmanPosition = newPosition;
         drawBoard();
     }
 }
 
 document.addEventListener('keydown', (e) => {
-    movePacman(e.key);
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        movePacman(e.key);
+    }
 });
 
 drawBoard();
