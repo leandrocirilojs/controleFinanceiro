@@ -3,17 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo Pac-Man Clone</title>
+    <title>Controle Financeiro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-board"></div>
-    <div id="controls">
-        <button onclick="movePacman('ArrowUp')">↑</button><br>
-        <button onclick="movePacman('ArrowLeft')">←</button>
-        <button onclick="movePacman('ArrowDown')">↓</button>
-        <button onclick="movePacman('ArrowRight')">→</button>
+    <!-- Tela de Saldo -->
+    <div class="balance-screen">
+        <div class="header">
+            <p>Bem-vindo de volta,</p>
+            <h1>Muhammad Noufal</h1>
+        </div>
+        <div class="balance-card">
+            <h2>Saldo Total</h2>
+            <p class="total-balance">R$ 7.736,00</p>
+            <div class="income-expense">
+                <div>
+                    <p>Receitas</p>
+                    <p class="income">R$ 8.500,00</p>
+                </div>
+                <div>
+                    <p>Despesas</p>
+                    <p class="expense">R$ 764,00</p>
+                </div>
+            </div>
+        </div>
+        <div class="recent-transactions">
+            <h3>Transações Recentes</h3>
+            <ul>
+                <li><span>WiFi TP-Link N300</span><span class="expense">- R$ 324,00</span></li>
+                <li><span>Jaqueta Bomber</span><span class="expense">- R$ 247,00</span></li>
+                <li><span>Mesada</span><span class="income">+ R$ 8.500,00</span></li>
+            </ul>
+        </div>
+        <button class="add-transaction-btn">+</button>
     </div>
+
+    <!-- Tela de Gráfico de Despesas -->
+    <div class="expenses-chart-screen">
+        <div class="chart-header">
+            <button class="income-expense-switch">Despesas</button>
+            <h2>Outubro - Semana 3</h2>
+        </div>
+        <div class="chart">
+            <!-- Gráfico circular e gráfico de barras (Placeholder) -->
+        </div>
+    </div>
+
+    <!-- Tela de Categorias de Despesa -->
+    <div class="expense-categories-screen">
+        <h2>Categorias</h2>
+        <div class="categories-grid">
+            <!-- Exemplos de ícones de categorias -->
+            <div class="category">Medicamentos</div>
+            <div class="category">Casa</div>
+            <div class="category">Compras</div>
+            <div class="category">Dispositivos</div>
+        </div>
+        <div class="memo">
+            <input type="text" placeholder="Memo">
+            <input type="number" placeholder="0">
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
