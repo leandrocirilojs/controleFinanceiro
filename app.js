@@ -1,5 +1,19 @@
 let transactions = [];
 
+// Carrega as transações do localStorage ao iniciar o aplicativo
+function carregarTransacoes() {
+    const transacoesSalvas = localStorage.getItem("transactions");
+    if (transacoesSalvas) {
+        transactions = JSON.parse(transacoesSalvas);
+        atualizarTransacoes();
+    }
+}
+
+// Salva as transações no localStorage
+function salvarTransacoes() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
 function abrirPopup() {
     document.getElementById("popup").style.display = "flex";
 }
@@ -15,17 +29,25 @@ function adicionarTransacao() {
 
     if (descricao && valor) {
         const transacao = {
+            id: Date.now(), // Gera um ID único para cada transação
             descricao,
             valor,
             tipo
         };
 
         transactions.push(transacao);
+        salvarTransacoes();
         atualizarTransacoes();
         fecharPopup();
     } else {
         alert("Por favor, preencha todos os campos.");
     }
+}
+
+function removerTransacao(id) {
+    transactions = transactions.filter(transacao => transacao.id !== id);
+    salvarTransacoes();
+    atualizarTransacoes();
 }
 
 function atualizarTransacoes() {
@@ -47,6 +69,7 @@ function atualizarTransacoes() {
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
@@ -62,3 +85,6 @@ function atualizarTransacoes() {
     document.getElementById("total-expenses").innerText = totalExpenses;
     document.getElementById("total-balance").innerText = totalIncome - totalExpenses;
 }
+
+// Carrega as transações ao iniciar o aplicativo
+carregarTransacoes();
