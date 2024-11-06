@@ -1,61 +1,33 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Outros estilos... */
+
+.transaction-form {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #F5F5F7;
-    color: #333;
+.transaction-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 
-.balance-screen {
-    padding: 20px;
-}
-
-.header h1 {
-    color: #6C63FF;
-}
-
-.balance-card {
+.transaction-form button {
+    width: 100%;
+    padding: 10px;
     background-color: #6C63FF;
     color: #FFF;
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.total-balance {
-    font-size: 2em;
-    margin-top: 10px;
-}
-
-.income-expense {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-.income, .expense {
-    font-size: 1.2em;
-}
-
-.recent-transactions {
-    margin-top: 30px;
-}
-
-.recent-transactions ul {
-    list-style: none;
-}
-
-.recent-transactions li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-
+/* Ajuste para o botão flutuante */
 .add-transaction-btn {
     position: fixed;
     bottom: 30px;
@@ -71,50 +43,4 @@ body {
     justify-content: center;
     border: none;
     cursor: pointer;
-}
-
-/* Gráfico de Despesas */
-.expenses-chart-screen {
-    padding: 20px;
-}
-
-.chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Categorias */
-.expense-categories-screen {
-    padding: 20px;
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.category {
-    background-color: #EFEFEF;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 0.9em;
-    cursor: pointer;
-}
-
-.memo {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.memo input[type="text"],
-.memo input[type="number"] {
-    width: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
 }
