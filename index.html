@@ -8,19 +8,36 @@
 </head>
 <body>
     <h1>Controle Financeiro</h1>
+    
     <div class="buttons">
         <button onclick="abrirPopup('despesa')">Adicionar Despesa</button>
         <button onclick="abrirPopup('ganho')">Adicionar Ganho</button>
     </div>
 
+    <!-- Tabela para exibir despesas e ganhos -->
+    <table id="tabela-financeira">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Linhas serão adicionadas dinamicamente -->
+        </tbody>
+    </table>
+
     <!-- Pop-up para cadastrar despesas -->
     <div id="popup-despesa" class="popup">
         <div class="popup-content">
             <span class="close" onclick="fecharPopup('despesa')">&times;</span>
-            <h2>Cadastrar Despesa</h2>
-            <input type="text" id="descricao-despesa" placeholder="Descrição">
-            <input type="number" id="valor-despesa" placeholder="Valor">
-            <button onclick="cadastrarTransacao('despesa')">Salvar</button>
+            <h2>Adicionar Despesa</h2>
+            <label>Descrição:</label>
+            <input type="text" id="descricao-despesa">
+            <label>Valor:</label>
+            <input type="number" id="valor-despesa">
+            <button onclick="adicionarRegistro('despesa')">Cadastrar</button>
         </div>
     </div>
 
@@ -28,10 +45,12 @@
     <div id="popup-ganho" class="popup">
         <div class="popup-content">
             <span class="close" onclick="fecharPopup('ganho')">&times;</span>
-            <h2>Cadastrar Ganho</h2>
-            <input type="text" id="descricao-ganho" placeholder="Descrição">
-            <input type="number" id="valor-ganho" placeholder="Valor">
-            <button onclick="cadastrarTransacao('ganho')">Salvar</button>
+            <h2>Adicionar Ganho</h2>
+            <label>Descrição:</label>
+            <input type="text" id="descricao-ganho">
+            <label>Valor:</label>
+            <input type="number" id="valor-ganho">
+            <button onclick="adicionarRegistro('ganho')">Cadastrar</button>
         </div>
     </div>
 
