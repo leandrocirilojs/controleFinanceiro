@@ -3,67 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Controle Financeiro</title>
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        .balance, .income-expenses, .transactions, .navigation {
+            margin-bottom: 20px;
+        }
+
+        .income, .expenses {
+            display: inline-block;
+            width: 45%;
+        }
+
+        .navigation button {
+            width: 100px;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .navigation button:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
 <body>
-
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 320px;
-    text-align: center;
-}
-
-.balance, .income-expenses, .transactions, .navigation {
-    margin-bottom: 20px;
-}
-
-.income, .expenses {
-    display: inline-block;
-    width: 45%;
-}
-
-.navigation button {
-    width: 100px;
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 4px;
-    background: #4CAF50;
-    color: #fff;
-    cursor: pointer;
-}
-
-.navigation button:hover {
-    background: #45a049;
-}
-</style>
     <div class="container">
         <div class="balance">
             <h2>Saldo Total</h2>
-            <p>IDR 7,736,000</p>
+            <p>R$ 7.736,00</p>
         </div>
         <div class="income-expenses">
             <div class="income">
                 <h3>Receita</h3>
-                <p>IDR 8,500,000</p>
+                <p>R$ 8.500,00</p>
             </div>
             <div class="expenses">
                 <h3>Despesas</h3>
-                <p>IDR 764,000</p>
+                <p>R$ 764,00</p>
             </div>
         </div>
         <div class="transactions">
@@ -76,31 +74,31 @@ body {
             <button id="report-btn">Relatórios</button>
         </div>
     </div>
+
     <script>
-const transactions = [
-    { description: "WiFi TP-Link N300", amount: -324000, date: "Hoje" },
-    { description: "Bomber Jacket", amount: -247000, date: "Ontem" },
-    { description: "Allowance", amount: 8500000, date: "15 Out 2020" }
-];
+        const transactions = [
+            { description: "WiFi TP-Link N300", amount: -324000, date: "Hoje" },
+            { description: "Jaqueta Bomber", amount: -247000, date: "Ontem" },
+            { description: "Mesada", amount: 8500000, date: "15 Out 2020" }
+        ];
 
-function loadTransactions() {
-    const transactionList = document.getElementById("transaction-list");
-    transactionList.innerHTML = "";
+        function loadTransactions() {
+            const transactionList = document.getElementById("transaction-list");
+            transactionList.innerHTML = "";
 
-    transactions.forEach((transaction, index) => {
-        const li = document.createElement("li");
-        li.classList.add("transaction");
-        li.innerHTML = `
-            <span>${transaction.description}</span>
-            <span>${transaction.amount < 0 ? '-' : '+'} ${Math.abs(transaction.amount).toLocaleString('pt-BR', {style: 'currency', currency: 'IDR'})}</span>
-            <span>${transaction.date}</span>
-        `;
-        transactionList.appendChild(li);
-    });
-}
+            transactions.forEach((transaction) => {
+                const li = document.createElement("li");
+                li.classList.add("transaction");
+                li.innerHTML = `
+                    <span>${transaction.description}</span>
+                    <span>${transaction.amount < 0 ? '-' : '+'} ${Math.abs(transaction.amount).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                    <span>${transaction.date}</span>
+                `;
+                transactionList.appendChild(li);
+            });
+        }
 
-window.onload = loadTransactions;
-
-</script>
+        window.onload = loadTransactions;
+    </script>
 </body>
 </html>
