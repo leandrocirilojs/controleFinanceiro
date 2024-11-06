@@ -1,21 +1,31 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const balanceScreen = document.querySelector('.balance-screen');
-    const expensesChartScreen = document.querySelector('.expenses-chart-screen');
-    const expenseCategoriesScreen = document.querySelector('.expense-categories-screen');
-    
-    // Exemplo de função para alternar entre telas
-    function showScreen(screen) {
-        balanceScreen.style.display = 'none';
-        expensesChartScreen.style.display = 'none';
-        expenseCategoriesScreen.style.display = 'none';
-        screen.style.display = 'block';
-    }
+    const transactionForm = document.getElementById('transaction-form');
+    const addTransactionBtn = document.getElementById('add-transaction-btn');
+    const saveTransactionBtn = document.getElementById('save-transaction-btn');
+    const transactionList = document.getElementById('transaction-list');
 
-    // Inicialmente mostra apenas a tela de saldo
-    showScreen(balanceScreen);
+    // Exibir o formulário de nova transação ao clicar no botão "+"
+    addTransactionBtn.addEventListener('click', function () {
+        transactionForm.style.display = transactionForm.style.display === 'none' ? 'block' : 'none';
+    });
 
-    // Adicionar evento para o botão de adicionar transação
-    document.querySelector('.add-transaction-btn').addEventListener('click', function () {
-        showScreen(expenseCategoriesScreen);
+    // Função para salvar a nova transação
+    saveTransactionBtn.addEventListener('click', function () {
+        const description = document.getElementById('transaction-description').value;
+        const amount = parseFloat(document.getElementById('transaction-amount').value);
+
+        if (description && !isNaN(amount)) {
+            const transactionItem = document.createElement('li');
+            const amountClass = amount >= 0 ? 'income' : 'expense';
+            transactionItem.innerHTML = `<span>${description}</span><span class="${amountClass}">${amount >= 0 ? '+' : '-'} R$ ${Math.abs(amount).toFixed(2)}</span>`;
+            transactionList.appendChild(transactionItem);
+
+            // Limpa o formulário
+            document.getElementById('transaction-description').value = '';
+            document.getElementById('transaction-amount').value = '';
+            transactionForm.style.display = 'none'; // Oculta o formulário
+        } else {
+            alert("Por favor, preencha todos os campos.");
+        }
     });
 });
