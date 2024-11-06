@@ -29,40 +29,20 @@
         </div>
         <div class="recent-transactions">
             <h3>Transações Recentes</h3>
-            <ul>
+            <ul id="transaction-list">
                 <li><span>WiFi TP-Link N300</span><span class="expense">- R$ 324,00</span></li>
                 <li><span>Jaqueta Bomber</span><span class="expense">- R$ 247,00</span></li>
                 <li><span>Mesada</span><span class="income">+ R$ 8.500,00</span></li>
             </ul>
         </div>
-        <button class="add-transaction-btn">+</button>
+        <button class="add-transaction-btn" id="add-transaction-btn">+</button>
     </div>
 
-    <!-- Tela de Gráfico de Despesas -->
-    <div class="expenses-chart-screen">
-        <div class="chart-header">
-            <button class="income-expense-switch">Despesas</button>
-            <h2>Outubro - Semana 3</h2>
-        </div>
-        <div class="chart">
-            <!-- Gráfico circular e gráfico de barras (Placeholder) -->
-        </div>
-    </div>
-
-    <!-- Tela de Categorias de Despesa -->
-    <div class="expense-categories-screen">
-        <h2>Categorias</h2>
-        <div class="categories-grid">
-            <!-- Exemplos de ícones de categorias -->
-            <div class="category">Medicamentos</div>
-            <div class="category">Casa</div>
-            <div class="category">Compras</div>
-            <div class="category">Dispositivos</div>
-        </div>
-        <div class="memo">
-            <input type="text" placeholder="Memo">
-            <input type="number" placeholder="0">
-        </div>
+    <!-- Formulário para adicionar nova transação -->
+    <div class="transaction-form" id="transaction-form">
+        <input type="text" id="transaction-description" placeholder="Descrição">
+        <input type="number" id="transaction-amount" placeholder="Valor">
+        <button id="save-transaction-btn">Salvar</button>
     </div>
 
     <script src="script.js"></script>
