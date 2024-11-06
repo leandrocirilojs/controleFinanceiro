@@ -11,15 +11,15 @@
         <!-- Cabeçalho de Saldo -->
         <div class="saldo">
             <p>Total Balance</p>
-            <h1>IDR 7.736.000</h1>
+            <h1 id="total-balance">IDR 0</h1>
             <div class="detalhes-saldo">
                 <div class="rendimento">
                     <p>Income</p>
-                    <h2>8.500.000</h2>
+                    <h2 id="total-income">0</h2>
                 </div>
                 <div class="gastos">
                     <p>Expenses</p>
-                    <h2>764.000</h2>
+                    <h2 id="total-expenses">0</h2>
                 </div>
             </div>
         </div>
@@ -30,34 +30,31 @@
                 <h3>Recent transactions</h3>
                 <a href="#">See All</a>
             </div>
-            <div class="transacao">
-                <div class="icon dispositivo"></div>
-                <div class="info">
-                    <h4>WiFi TP-Link N300</h4>
-                    <p>Device</p>
-                </div>
-                <div class="valor negativo">- 324.000</div>
-            </div>
-            <div class="transacao">
-                <div class="icon shopping"></div>
-                <div class="info">
-                    <h4>Bomber Jacket</h4>
-                    <p>Shopping</p>
-                </div>
-                <div class="valor negativo">- 247.000</div>
-            </div>
-            <div class="transacao">
-                <div class="icon salario"></div>
-                <div class="info">
-                    <h4>Allowance</h4>
-                    <p>Salary</p>
-                </div>
-                <div class="valor positivo">+ 8.500.000</div>
+            <div id="transaction-list">
+                <!-- Transações serão adicionadas aqui dinamicamente -->
             </div>
         </div>
         
         <!-- Botão para adicionar transação -->
-        <button class="botao-adicionar">+</button>
+        <button class="botao-adicionar" onclick="abrirPopup()">+</button>
+    </div>
+
+    <!-- Pop-up para cadastrar transação -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="fecharPopup()">&times;</span>
+            <h2>Adicionar Transação</h2>
+            <label>Descrição:</label>
+            <input type="text" id="descricao">
+            <label>Valor:</label>
+            <input type="number" id="valor">
+            <label>Tipo:</label>
+            <select id="tipo">
+                <option value="ganho">Ganho</option>
+                <option value="despesa">Despesa</option>
+            </select>
+            <button onclick="adicionarTransacao()">Cadastrar</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
