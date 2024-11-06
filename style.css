@@ -35,6 +35,20 @@ body, html {
     margin: 5px 0;
 }
 
+.remover {
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remover:hover {
+    background-color: #d32f2f;
+}
+
 .detalhes-saldo {
     display: flex;
     justify-content: space-around;
