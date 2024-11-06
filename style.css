@@ -1,49 +1,144 @@
-body {
+/* Estilos gerais */
+body, html {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-.buttons {
-    margin: 20px;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 8px;
-    text-align: center;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background-color: #f4f4f8;
 }
 
-.popup-content {
-    background-color: #fff;
+.container {
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Cabeçalho de Saldo */
+.saldo {
+    background-color: #6200ea;
+    color: #fff;
     padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    text-align: left;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.close {
-    float: right;
-    font-size: 24px;
+.saldo p {
+    font-size: 1em;
+    margin: 0;
+}
+
+.saldo h1 {
+    font-size: 2em;
+    margin: 5px 0;
+}
+
+.detalhes-saldo {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.rendimento, .gastos {
+    text-align: center;
+}
+
+.rendimento p, .gastos p {
+    font-size: 0.9em;
+    color: #b3b3f0;
+}
+
+.rendimento h2, .gastos h2 {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+/* Histórico de Transações */
+.historico .titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.historico h3 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.historico a {
+    font-size: 0.9em;
+    color: #6200ea;
+    text-decoration: none;
+}
+
+.transacao {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.dispositivo {
+    background-color: #d1c4e9;
+}
+
+.shopping {
+    background-color: #f8bbd0;
+}
+
+.salario {
+    background-color: #c8e6c9;
+}
+
+.info h4 {
+    margin: 0;
+    font-size: 1em;
+}
+
+.info p {
+    margin: 0;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.valor {
+    margin-left: auto;
+    font-size: 1em;
+}
+
+.positivo {
+    color: #4caf50;
+}
+
+.negativo {
+    color: #e53935;
+}
+
+/* Botão para adicionar transação */
+.botao-adicionar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6200ea;
+    color: #fff;
+    font-size: 1.5em;
+    border: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
