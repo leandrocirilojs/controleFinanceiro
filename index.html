@@ -7,51 +7,57 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Controle Financeiro</h1>
-    
-    <div class="buttons">
-        <button onclick="abrirPopup('despesa')">Adicionar Despesa</button>
-        <button onclick="abrirPopup('ganho')">Adicionar Ganho</button>
-    </div>
-
-    <!-- Tabela para exibir despesas e ganhos -->
-    <table id="tabela-financeira">
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Linhas serão adicionadas dinamicamente -->
-        </tbody>
-    </table>
-
-    <!-- Pop-up para cadastrar despesas -->
-    <div id="popup-despesa" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="fecharPopup('despesa')">&times;</span>
-            <h2>Adicionar Despesa</h2>
-            <label>Descrição:</label>
-            <input type="text" id="descricao-despesa">
-            <label>Valor:</label>
-            <input type="number" id="valor-despesa">
-            <button onclick="adicionarRegistro('despesa')">Cadastrar</button>
+    <div class="container">
+        <!-- Cabeçalho de Saldo -->
+        <div class="saldo">
+            <p>Total Balance</p>
+            <h1>IDR 7.736.000</h1>
+            <div class="detalhes-saldo">
+                <div class="rendimento">
+                    <p>Income</p>
+                    <h2>8.500.000</h2>
+                </div>
+                <div class="gastos">
+                    <p>Expenses</p>
+                    <h2>764.000</h2>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Pop-up para cadastrar ganhos -->
-    <div id="popup-ganho" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="fecharPopup('ganho')">&times;</span>
-            <h2>Adicionar Ganho</h2>
-            <label>Descrição:</label>
-            <input type="text" id="descricao-ganho">
-            <label>Valor:</label>
-            <input type="number" id="valor-ganho">
-            <button onclick="adicionarRegistro('ganho')">Cadastrar</button>
+        <!-- Histórico de Transações -->
+        <div class="historico">
+            <div class="titulo">
+                <h3>Recent transactions</h3>
+                <a href="#">See All</a>
+            </div>
+            <div class="transacao">
+                <div class="icon dispositivo"></div>
+                <div class="info">
+                    <h4>WiFi TP-Link N300</h4>
+                    <p>Device</p>
+                </div>
+                <div class="valor negativo">- 324.000</div>
+            </div>
+            <div class="transacao">
+                <div class="icon shopping"></div>
+                <div class="info">
+                    <h4>Bomber Jacket</h4>
+                    <p>Shopping</p>
+                </div>
+                <div class="valor negativo">- 247.000</div>
+            </div>
+            <div class="transacao">
+                <div class="icon salario"></div>
+                <div class="info">
+                    <h4>Allowance</h4>
+                    <p>Salary</p>
+                </div>
+                <div class="valor positivo">+ 8.500.000</div>
+            </div>
         </div>
+        
+        <!-- Botão para adicionar transação -->
+        <button class="botao-adicionar">+</button>
     </div>
 
     <script src="app.js"></script>
