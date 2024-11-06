@@ -1,165 +1,40 @@
-/* Outros estilos... */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #F5F5F7;
+    text-align: center;
+    background-color: #f4f4f9;
+}
+
+h1 {
     color: #333;
 }
 
-.balance-screen {
-    padding: 20px;
+.buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
-.header h1 {
-    color: #6C63FF;
-}
-
-.balance-card {
-    background-color: #6C63FF;
-    color: #FFF;
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.total-balance {
-    font-size: 2em;
-    margin-top: 10px;
-}
-
-.income-expense {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-.income, .expense {
-    font-size: 1.2em;
-}
-
-.recent-transactions {
-    margin-top: 30px;
-}
-
-.recent-transactions ul {
-    list-style: none;
-}
-
-.recent-transactions li {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-}
-
-.add-transaction-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #6C63FF;
-    color: #FFF;
-    font-size: 2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-}
-
-/* Gráfico de Despesas */
-.expenses-chart-screen {
-    padding: 20px;
-}
-
-.chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Categorias */
-.expense-categories-screen {
-    padding: 20px;
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.category {
-    background-color: #EFEFEF;
-    text-align: center;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 0.9em;
-    cursor: pointer;
-}
-
-.memo {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.memo input[type="text"],
-.memo input[type="number"] {
-    width: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-.transaction-form {
+.popup {
     display: none;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #FFF;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.transaction-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-.transaction-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #6C63FF;
-    color: #FFF;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-/* Ajuste para o botão flutuante */
-.add-transaction-btn {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #6C63FF;
-    color: #FFF;
-    font-size: 2em;
-    display: flex;
-    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     justify-content: center;
-    border: none;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.close {
+    float: right;
+    font-size: 24px;
     cursor: pointer;
 }
