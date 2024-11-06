@@ -1,31 +1,19 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const transactionForm = document.getElementById('transaction-form');
-    const addTransactionBtn = document.getElementById('add-transaction-btn');
-    const saveTransactionBtn = document.getElementById('save-transaction-btn');
-    const transactionList = document.getElementById('transaction-list');
+function abrirPopup(tipo) {
+    document.getElementById(`popup-${tipo}`).style.display = 'flex';
+}
 
-    // Exibir o formulário de nova transação ao clicar no botão "+"
-    addTransactionBtn.addEventListener('click', function () {
-        transactionForm.style.display = transactionForm.style.display === 'none' ? 'block' : 'none';
-    });
+function fecharPopup(tipo) {
+    document.getElementById(`popup-${tipo}`).style.display = 'none';
+}
 
-    // Função para salvar a nova transação
-    saveTransactionBtn.addEventListener('click', function () {
-        const description = document.getElementById('transaction-description').value;
-        const amount = parseFloat(document.getElementById('transaction-amount').value);
+function cadastrarTransacao(tipo) {
+    const descricao = document.getElementById(`descricao-${tipo}`).value;
+    const valor = parseFloat(document.getElementById(`valor-${tipo}`).value);
 
-        if (description && !isNaN(amount)) {
-            const transactionItem = document.createElement('li');
-            const amountClass = amount >= 0 ? 'income' : 'expense';
-            transactionItem.innerHTML = `<span>${description}</span><span class="${amountClass}">${amount >= 0 ? '+' : '-'} R$ ${Math.abs(amount).toFixed(2)}</span>`;
-            transactionList.appendChild(transactionItem);
-
-            // Limpa o formulário
-            document.getElementById('transaction-description').value = '';
-            document.getElementById('transaction-amount').value = '';
-            transactionForm.style.display = 'none'; // Oculta o formulário
-        } else {
-            alert("Por favor, preencha todos os campos.");
-        }
-    });
-});
+    if (descricao && !isNaN(valor)) {
+        console.log(`Tipo: ${tipo}, Descrição: ${descricao}, Valor: ${valor}`);
+        fecharPopup(tipo);
+    } else {
+        alert('Por favor, preencha todos os campos.');
+    }
+}
