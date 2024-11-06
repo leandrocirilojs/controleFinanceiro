@@ -1,5 +1,124 @@
 /* Outros estilos... */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F7;
+    color: #333;
+}
+
+.balance-screen {
+    padding: 20px;
+}
+
+.header h1 {
+    color: #6C63FF;
+}
+
+.balance-card {
+    background-color: #6C63FF;
+    color: #FFF;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.total-balance {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.income-expense {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.income, .expense {
+    font-size: 1.2em;
+}
+
+.recent-transactions {
+    margin-top: 30px;
+}
+
+.recent-transactions ul {
+    list-style: none;
+}
+
+.recent-transactions li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.add-transaction-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #6C63FF;
+    color: #FFF;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+/* Gráfico de Despesas */
+.expenses-chart-screen {
+    padding: 20px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Categorias */
+.expense-categories-screen {
+    padding: 20px;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.category {
+    background-color: #EFEFEF;
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.memo {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.memo input[type="text"],
+.memo input[type="number"] {
+    width: 50%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
 .transaction-form {
     display: none;
     margin-top: 20px;
