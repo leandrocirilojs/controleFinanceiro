@@ -163,7 +163,7 @@ function atualizarTransacoes() {
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
-            <button onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
+            <button class="botao-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
             <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
@@ -181,7 +181,7 @@ function atualizarTransacoes() {
     document.getElementById("total-balance").innerText = totalIncome - totalExpenses;
 }
 
-// Função para formatar os valores como moeda
+// valores como moeda
 function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
