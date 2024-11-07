@@ -164,7 +164,7 @@ function atualizarTransacoes() {
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
             <button class="botao-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})"> X </button>
         `;
 
         transactionList.appendChild(transacaoDiv);
