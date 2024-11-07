@@ -118,24 +118,26 @@ function adicionarTransacao() {
     const descricao = document.getElementById("descricao").value;
     const valor = parseFloat(document.getElementById("valor").value);
     const tipo = document.getElementById("tipo").value;
+    const data = document.getElementById("data").value;
+    const status = document.getElementById("status").value;
 
-    // Validação de entrada
-    if (!descricao || isNaN(valor) || valor <= 0) {
-        alert("Por favor, preencha todos os campos corretamente.");
-        return;
+    if (descricao && valor && data) {
+        const transacao = {
+            id: Date.now(),
+            descricao,
+            valor,
+            tipo,
+            data,
+            status
+        };
+
+        transactions.push(transacao);
+        salvarTransacoes();
+        atualizarTransacoes();
+        fecharPopup();
+    } else {
+        alert("Por favor, preencha todos os campos.");
     }
-
-    const transacao = {
-        id: Date.now(),
-        descricao,
-        valor,
-        tipo
-    };
-
-    transactions.push(transacao);
-    salvarTransacoes();
-    atualizarTransacoes();
-    fecharPopup();
 }
 
 function removerTransacao(id) {
