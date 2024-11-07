@@ -161,12 +161,14 @@ function atualizarTransacoes() {
             <div class="info">
                 <h4>${transacao.descricao}</h4>
                 <p>${transacao.tipo === "ganho" ? "Income" : "Expense"}</p>
+                <p>Data: ${transacao.data}</p>
+                <p>Status: ${transacao.status === "pago" ? "Pago" : "Não Pago"}</p>
             </div>
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
-            <button class="botao-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})"> X </button>
+            <button class="botao-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
