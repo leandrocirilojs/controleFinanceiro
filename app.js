@@ -204,16 +204,20 @@ let detalheTransacaoID = null;
 // Função para abrir o pop-up de detalhes da transação
 function verDetalhesTransacao(id) {
     const transacao = transactions.find(t => t.id === id);
-    if (transacao) {
-        // Carregar detalhes da transação
-        document.getElementById("detalhe-descricao").innerText = transacao.descricao;
-        document.getElementById("detalhe-valor").innerText = formatarMoeda(transacao.valor);
-        document.getElementById("detalhe-tipo").innerText = transacao.tipo === "ganho" ? "Ganho" : "Despesa";
-        document.getElementById("detalhe-data").innerText = new Date(transacao.id).toLocaleDateString("pt-BR");
 
-        detalheTransacaoID = id;
-        document.getElementById("detalhe-popup").style.display = "flex";
+    if (transacao) {
+        document.getElementById("detalhes-descricao").innerText = transacao.descricao;
+        document.getElementById("detalhes-valor").innerText = `${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}`;
+        document.getElementById("detalhes-tipo").innerText = transacao.tipo === "ganho" ? "Ganho" : "Despesa";
+        document.getElementById("detalhes-data").innerText = transacao.data;
+        document.getElementById("detalhes-status").innerText = transacao.status === "pago" ? "Pago" : "Não Pago";
+
+        document.getElementById("detalhes-popup").style.display = "flex";
     }
+}
+
+function fecharDetalhesPopup() {
+    document.getElementById("detalhes-popup").style.display = "none";
 }
 
 // Função para fechar o pop-up de detalhes
