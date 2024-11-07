@@ -70,16 +70,16 @@
 </div>
 
 <!-- Pop-up de Detalhamento da Transação -->
-<div id="detalhe-popup" class="popup">
+<!-- Pop-up para visualizar detalhes da transação -->
+<div id="detalhes-popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="fecharDetalhePopup()">&times;</span>
+        <span class="close" onclick="fecharDetalhesPopup()">&times;</span>
         <h2>Detalhes da Transação</h2>
-        <p><strong>Descrição:</strong> <span id="detalhe-descricao"></span></p>
-        <p><strong>Valor:</strong> <span id="detalhe-valor"></span></p>
-        <p><strong>Tipo:</strong> <span id="detalhe-tipo"></span></p>
-        <p><strong>Data:</strong> <span id="detalhe-data"></span></p>
-        <button onclick="editarTransacao()">Editar</button>
-        <button onclick="removerTransacao(detalheTransacaoID)">Remover</button>
+        <p><strong>Descrição:</strong> <span id="detalhes-descricao"></span></p>
+        <p><strong>Valor:</strong> <span id="detalhes-valor"></span></p>
+        <p><strong>Tipo:</strong> <span id="detalhes-tipo"></span></p>
+        <p><strong>Data:</strong> <span id="detalhes-data"></span></p>
+        <p><strong>Status:</strong> <span id="detalhes-status"></span></p>
     </div>
 </div>
 
