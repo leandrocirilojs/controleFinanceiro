@@ -1,5 +1,5 @@
 let transactions = [];
-let detalheTransacaoID = null; // ID da transação que será editada
+let detalheTransacaoID = null; // Variável para rastrear o ID da transação a ser editada
 
 // Carrega as transações do localStorage ao iniciar o aplicativo
 function carregarTransacoes() {
@@ -22,19 +22,8 @@ function abrirPopup() {
 function fecharPopup() {
     document.getElementById("popup").style.display = "none";
     detalheTransacaoID = null; // Limpa o ID ao fechar o pop-up
-    limparCampos();
 }
 
-// Função para limpar os campos do formulário
-function limparCampos() {
-    document.getElementById("descricao").value = '';
-    document.getElementById("valor").value = '';
-    document.getElementById("tipo").value = 'ganho';
-    document.getElementById("data").value = '';
-    document.getElementById("status").value = 'pago';
-}
-
-// Função para adicionar ou editar uma transação
 function adicionarOuEditarTransacao() {
     const descricao = document.getElementById("descricao").value;
     const valor = parseFloat(document.getElementById("valor").value);
@@ -44,7 +33,7 @@ function adicionarOuEditarTransacao() {
 
     if (descricao && valor && data) {
         if (detalheTransacaoID !== null) {
-            // Edita transação existente
+            // Atualiza transação existente
             const transacao = transactions.find(t => t.id === detalheTransacaoID);
             transacao.descricao = descricao;
             transacao.valor = valor;
@@ -97,7 +86,7 @@ function atualizarTransacoes() {
                 <p>Status: ${transacao.status === "pago" ? "Pago" : "Não Pago"}</p>
             </div>
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
-                ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
+                ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
             <button class="botao-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
             <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
@@ -117,23 +106,35 @@ function atualizarTransacoes() {
     document.getElementById("total-balance").innerText = formatarMoeda(totalIncome - totalExpenses);
 }
 
+// Função para abrir o pop-up de detalhes da transação
 function verDetalhesTransacao(id) {
     const transacao = transactions.find(t => t.id === id);
 
     if (transacao) {
-        document.getElementById("descricao").value = transacao.descricao;
-        document.getElementById("valor").value = transacao.valor;
-        document.getElementById("tipo").value = transacao.tipo;
-        document.getElementById("data").value = transacao.data;
-        document.getElementById("status").value = transacao.status;
+        document.getElementById("detalhes-descricao").innerText = transacao.descricao;
+        document.getElementById("detalhes-valor").innerText = `${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}`;
+        document.getElementById("detalhes-tipo").innerText = transacao.tipo === "ganho" ? "Ganho" : "Despesa";
+        document.getElementById("detalhes-data").innerText = transacao.data;
+        document.getElementById("detalhes-status").innerText = transacao.status === "pago" ? "Pago" : "Não Pago";
 
+        // Configura o botão de edição para abrir o pop-up com os dados preenchidos
         detalheTransacaoID = id;
-        abrirPopup();
+        abrirPopupComTransacao(transacao);
     }
 }
 
-function formatarMoeda(valor) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+function abrirPopupComTransacao(transacao) {
+    document.getElementById("descricao").value = transacao.descricao;
+    document.getElementById("valor").value = transacao.valor;
+    document.getElementById("tipo").value = transacao.tipo;
+    document.getElementById("data").value = transacao.data;
+    document.getElementById("status").value = transacao.status;
+
+    abrirPopup();
+}
+
+function fecharDetalhesPopup() {
+    document.getElementById("detalhes-popup").style.display = "none";
 }
 
 // Carrega as transações ao iniciar o aplicativo
