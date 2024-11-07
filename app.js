@@ -158,12 +158,13 @@ function atualizarTransacoes() {
         transacaoDiv.innerHTML = `
             <div class="info">
                 <h4>${transacao.descricao}</h4>
-                <p>${transacao.tipo === "ganho" ? "Ganho" : "Despesa"}</p>
+                <p>${transacao.tipo === "ganho" ? "Income" : "Expense"}</p>
             </div>
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
-                ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
+                ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
             </div>
-            <button class="remover" onclick="removerTransacao(${transacao.id})"> X </button>
+            <button onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
@@ -175,9 +176,9 @@ function atualizarTransacoes() {
         }
     });
 
-    document.getElementById("total-income").innerText = formatarMoeda(totalIncome);
-    document.getElementById("total-expenses").innerText = formatarMoeda(totalExpenses);
-    document.getElementById("total-balance").innerText = formatarMoeda(totalIncome - totalExpenses);
+    document.getElementById("total-income").innerText = totalIncome;
+    document.getElementById("total-expenses").innerText = totalExpenses;
+    document.getElementById("total-balance").innerText = totalIncome - totalExpenses;
 }
 
 // Função para formatar os valores como moeda
