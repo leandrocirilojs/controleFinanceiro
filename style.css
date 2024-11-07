@@ -11,8 +11,8 @@ body, html {
 }
 
 .container {
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 600px;
 }
 
 /* Cabeçalho de Saldo */
