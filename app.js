@@ -34,9 +34,10 @@ function adicionarTransacao() {
     const valor = parseFloat(document.getElementById("valor").value);
     const tipo = document.getElementById("tipo").value;
     const dataPagamento = document.getElementById("data-pagamento").value;
+    const statusPagamento = document.getElementById("status-pagamento").value; // Novo campo
 
     // Validação de entrada
-    if (!descricao || isNaN(valor) || valor <= 0 || !dataPagamento) {
+    if (!descricao || isNaN(valor) || valor <= 0 || !dataPagamento || !statusPagamento) {
         alert("Por favor, preencha todos os campos corretamente.");
         return;
     }
@@ -47,7 +48,8 @@ function adicionarTransacao() {
         valor,
         tipo,
         dataCadastro: new Date().toISOString().split("T")[0],
-        dataPagamento
+        dataPagamento,
+        statusPagamento // Novo campo adicionado
     };
 
     // Adiciona a transação ao array e salva no localStorage
@@ -60,19 +62,13 @@ function adicionarTransacao() {
     document.getElementById("valor").value = '';
     document.getElementById("tipo").value = 'ganho';
     document.getElementById("data-pagamento").value = '';
+    document.getElementById("status-pagamento").value = 'não pago';
 
     fecharPopup();
 }
 
-// Função para remover uma transação
-function removerTransacao(id) {
-    transactions = transactions.filter(transacao => transacao.id !== id);
-    salvarTransacoes();
-    atualizarTransacoes();
-    fecharDetalhePopup(); // Fecha o pop-up de detalhes, se estiver aberto
-}
 
-// Função para atualizar a lista de transações exibida
+
 function atualizarTransacoes() {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
@@ -90,12 +86,13 @@ function atualizarTransacoes() {
                 <p>${transacao.tipo === "ganho" ? "Income" : "Expense"}</p>
                 <p>Data de Cadastro: ${new Date(transacao.dataCadastro).toLocaleDateString("pt-BR")}</p>
                 <p>Data de Pagamento: ${new Date(transacao.dataPagamento).toLocaleDateString("pt-BR")}</p>
+                <p>Status: ${transacao.statusPagamento === "pago" ? "✅ Pago" : "❌ Não Pago"}</p>
             </div>
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
             </div>
-            <button class="ver-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})"> X </button>
+            <button class="ver-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
@@ -114,22 +111,34 @@ function atualizarTransacoes() {
     document.getElementById("total-balance").innerText = formatarMoeda(totalIncome - totalExpenses);
 }
 
+
+
+
+// Função para remover uma transação
+function removerTransacao(id) {
+    transactions = transactions.filter(transacao => transacao.id !== id);
+    salvarTransacoes();
+    atualizarTransacoes();
+    fecharDetalhePopup(); // Fecha o pop-up de detalhes, se estiver aberto
+}
+
+// Função para atualizar a lista de transações exibida
+function atualizarTransacoes() {
+
+
 // Função para exibir detalhes de uma transação no pop-up
 function verDetalhesTransacao(id) {
-    
     const transacao = transactions.find(t => t.id === id);
     if (transacao) {
-        // Carregar detalhes da transação no pop-up
         document.getElementById("detalhe-descricao").innerText = transacao.descricao;
         document.getElementById("detalhe-valor").innerText = formatarMoeda(transacao.valor);
         document.getElementById("detalhe-tipo").innerText = transacao.tipo === "ganho" ? "Ganho" : "Despesa";
         document.getElementById("detalhe-data-cadastro").innerText = new Date(transacao.dataCadastro).toLocaleDateString("pt-BR");
         document.getElementById("detalhe-data-pagamento").innerText = new Date(transacao.dataPagamento).toLocaleDateString("pt-BR");
+        document.getElementById("detalhe-status").innerText = transacao.statusPagamento === "pago" ? "✅ Pago" : "❌ Não Pago";
 
         detalheTransacaoID = id;
         document.getElementById("detalhe-popup").style.display = "flex";
-    } else {
-        alert("Transação não encontrada!");
     }
 }
 
