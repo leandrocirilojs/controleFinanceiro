@@ -1,34 +1,39 @@
-
-
 let transactions = [];
 
-// Carrega as transações do localStorage ao iniciar o aplicativo
+// Função para carregar as transações do localStorage ao iniciar o aplicativo
 function carregarTransacoes() {
-    const transacoesSalvas = localStorage.getItem("transactions");
-    if (transacoesSalvas) {
-        transactions = JSON.parse(transacoesSalvas);
+    try {
+        const transacoesSalvas = localStorage.getItem("transactions");
+        if (transacoesSalvas) {
+            transactions = JSON.parse(transacoesSalvas) || [];
+        }
         atualizarTransacoes();
+    } catch (error) {
+        console.error("Erro ao carregar transações:", error);
     }
 }
 
-// Salva as transações no localStorage
+// Função para salvar as transações no localStorage
 function salvarTransacoes() {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
+// Função para abrir o pop-up de adicionar transação
 function abrirPopup() {
     document.getElementById("popup").style.display = "flex";
 }
 
+// Função para fechar o pop-up de adicionar transação
 function fecharPopup() {
     document.getElementById("popup").style.display = "none";
 }
 
+// Função para adicionar uma nova transação
 function adicionarTransacao() {
     const descricao = document.getElementById("descricao").value;
     const valor = parseFloat(document.getElementById("valor").value);
     const tipo = document.getElementById("tipo").value;
-    const dataPagamento = document.getElementById("data-pagamento").value; // Novo campo
+    const dataPagamento = document.getElementById("data-pagamento").value;
 
     // Validação de entrada
     if (!descricao || isNaN(valor) || valor <= 0 || !dataPagamento) {
@@ -41,22 +46,33 @@ function adicionarTransacao() {
         descricao,
         valor,
         tipo,
-        dataCadastro: new Date().toISOString().split("T")[0], // Data atual
-        dataPagamento // Data escolhida pelo usuário
+        dataCadastro: new Date().toISOString().split("T")[0],
+        dataPagamento
     };
 
+    // Adiciona a transação ao array e salva no localStorage
     transactions.push(transacao);
     salvarTransacoes();
     atualizarTransacoes();
+
+    // Limpa os campos do formulário após adicionar
+    document.getElementById("descricao").value = '';
+    document.getElementById("valor").value = '';
+    document.getElementById("tipo").value = 'ganho';
+    document.getElementById("data-pagamento").value = '';
+
     fecharPopup();
 }
+
+// Função para remover uma transação
 function removerTransacao(id) {
     transactions = transactions.filter(transacao => transacao.id !== id);
     salvarTransacoes();
     atualizarTransacoes();
+    fecharDetalhePopup(); // Fecha o pop-up de detalhes, se estiver aberto
 }
 
-
+// Função para atualizar a lista de transações exibida
 function atualizarTransacoes() {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
@@ -84,6 +100,7 @@ function atualizarTransacoes() {
 
         transactionList.appendChild(transacaoDiv);
 
+        // Atualiza o total de ganhos e despesas
         if (transacao.tipo === "ganho") {
             totalIncome += transacao.valor;
         } else {
@@ -91,39 +108,27 @@ function atualizarTransacoes() {
         }
     });
 
+    // Atualiza os totais no cabeçalho
     document.getElementById("total-income").innerText = formatarMoeda(totalIncome);
     document.getElementById("total-expenses").innerText = formatarMoeda(totalExpenses);
     document.getElementById("total-balance").innerText = formatarMoeda(totalIncome - totalExpenses);
 }
 
-// Função para formatar os valores como moeda
-function formatarMoeda(valor) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-// Carrega as transações ao iniciar o aplicativo
-carregarTransacoes();
-
-
-
-
-
-
-
-let detalheTransacaoID = null;
-
-// Função para abrir o pop-up de detalhes da transação
+// Função para exibir detalhes de uma transação no pop-up
 function verDetalhesTransacao(id) {
     const transacao = transactions.find(t => t.id === id);
     if (transacao) {
-        // Carregar detalhes da transação
+        // Carregar detalhes da transação no pop-up
         document.getElementById("detalhe-descricao").innerText = transacao.descricao;
         document.getElementById("detalhe-valor").innerText = formatarMoeda(transacao.valor);
         document.getElementById("detalhe-tipo").innerText = transacao.tipo === "ganho" ? "Ganho" : "Despesa";
-        document.getElementById("detalhe-data").innerText = new Date(transacao.id).toLocaleDateString("pt-BR");
+        document.getElementById("detalhe-data-cadastro").innerText = new Date(transacao.dataCadastro).toLocaleDateString("pt-BR");
+        document.getElementById("detalhe-data-pagamento").innerText = new Date(transacao.dataPagamento).toLocaleDateString("pt-BR");
 
         detalheTransacaoID = id;
         document.getElementById("detalhe-popup").style.display = "flex";
+    } else {
+        console.error("Transação não encontrada!");
     }
 }
 
@@ -132,30 +137,10 @@ function fecharDetalhePopup() {
     document.getElementById("detalhe-popup").style.display = "none";
 }
 
-// Função para editar transação
-function editarTransacao() {
-    const transacao = transactions.find(t => t.id === detalheTransacaoID);
-    if (transacao) {
-        document.getElementById("descricao").value = transacao.descricao;
-        document.getElementById("valor").value = transacao.valor;
-        document.getElementById("tipo").value = transacao.tipo;
-
-        // Remove a transação atual para poder salvar as alterações como uma nova entrada
-        removerTransacao(detalheTransacaoID);
-        fecharDetalhePopup();
-        abrirPopup();
-    }
-}
-
-// Função para remover transação diretamente do pop-up de detalhes
-function removerTransacao(id) {
-    transactions = transactions.filter(transacao => transacao.id !== id);
-    salvarTransacoes();
-    atualizarTransacoes();
-    fecharDetalhePopup();
-}
-
-// Função de formatação de moeda para valores
+// Função para formatar valores como moeda BRL
 function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
+
+// Carrega as transações ao iniciar o aplicativo
+carregarTransacoes();
