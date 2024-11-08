@@ -56,7 +56,7 @@ function removerTransacao(id) {
     atualizarTransacoes();
 }
 
-function atualizarTransacoes() {
+
 function atualizarTransacoes() {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
