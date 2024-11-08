@@ -66,7 +66,19 @@
 
     <!-- Lista de Transações com botão "Ver Detalhes" -->
 
-
+<!-- Pop-up para detalhes da transação -->
+<div id="detalhe-popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="fecharDetalhePopup()">&times;</span>
+        <h2>Detalhes da Transação</h2>
+        <p><strong>Descrição:</strong> <span id="detalhe-descricao"></span></p>
+        <p><strong>Valor:</strong> <span id="detalhe-valor"></span></p>
+        <p><strong>Tipo:</strong> <span id="detalhe-tipo"></span></p>
+        <p><strong>Data de Cadastro:</strong> <span id="detalhe-data-cadastro"></span></p>
+        <p><strong>Data de Pagamento:</strong> <span id="detalhe-data-pagamento"></span></p>
+        <button onclick="fecharDetalhePopup()">Fechar</button>
+    </div>
+</div>
     <script src="app.js"></script>
 </body>
 </html>
