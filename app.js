@@ -77,8 +77,8 @@ function atualizarTransacoes() {
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
             </div>
-            <button onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
+            <button onclick="verDetalhesTransacao(${transacao.id})">Detalhes</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">X</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
