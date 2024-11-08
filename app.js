@@ -1,5 +1,5 @@
 let transactions = [];
-
+let detalheTransacaoID;
 // Função para carregar as transações do localStorage ao iniciar o aplicativo
 function carregarTransacoes() {
     try {
