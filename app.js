@@ -1,65 +1,90 @@
-// Seleciona os elementos do DOM
-const form = document.getElementById('transaction-form');
-const descriptionInput = document.getElementById('description');
-const amountInput = document.getElementById('amount');
-const transactionList = document.getElementById('transaction-list');
-const balanceEl = document.getElementById('balance');
-
 let transactions = [];
 
-// Atualiza o saldo total
-function updateBalance() {
-    const total = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
-    balanceEl.textContent = `R$ ${total.toFixed(2)}`;
-}
-
-// Adiciona uma nova transação
-function addTransaction(event) {
-    event.preventDefault();
-    
-    const description = descriptionInput.value;
-    const amount = parseFloat(amountInput.value);
-
-    if (isNaN(amount) || description.trim() === '') {
-        alert('Por favor, insira uma descrição e um valor válido.');
-        return;
+// Carrega as transações do localStorage ao iniciar o aplicativo
+function carregarTransacoes() {
+    const transacoesSalvas = localStorage.getItem("transactions");
+    if (transacoesSalvas) {
+        transactions = JSON.parse(transacoesSalvas);
+        atualizarTransacoes();
     }
-
-    const transaction = {
-        id: Date.now(),
-        description,
-        amount
-    };
-
-    transactions.push(transaction);
-    renderTransactions();
-    updateBalance();
-
-    // Limpa o formulário
-    form.reset();
 }
 
-// Renderiza a lista de transações
-function renderTransactions() {
-    transactionList.innerHTML = '';
+// Salva as transações no localStorage
+function salvarTransacoes() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
 
-    transactions.forEach(transaction => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            ${transaction.description} 
-            <span>${transaction.amount > 0 ? '+' : ''}R$ ${transaction.amount.toFixed(2)}</span>
-            <button onclick="removeTransaction(${transaction.id})">x</button>
+function abrirPopup() {
+    document.getElementById("popup").style.display = "flex";
+}
+
+function fecharPopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function adicionarTransacao() {
+    const descricao = document.getElementById("descricao").value;
+    const valor = parseFloat(document.getElementById("valor").value);
+    const tipo = document.getElementById("tipo").value;
+
+    if (descricao && valor) {
+        const transacao = {
+            id: Date.now(), // Gera um ID único para cada transação
+            descricao,
+            valor,
+            tipo
+        };
+
+        transactions.push(transacao);
+        salvarTransacoes();
+        atualizarTransacoes();
+        fecharPopup();
+    } else {
+        alert("Por favor, preencha todos os campos.");
+    }
+}
+
+function removerTransacao(id) {
+    transactions = transactions.filter(transacao => transacao.id !== id);
+    salvarTransacoes();
+    atualizarTransacoes();
+}
+
+function atualizarTransacoes() {
+    const transactionList = document.getElementById("transaction-list");
+    transactionList.innerHTML = "";
+
+    let totalIncome = 0;
+    let totalExpenses = 0;
+
+    transactions.forEach((transacao) => {
+        const transacaoDiv = document.createElement("div");
+        transacaoDiv.classList.add("transacao");
+
+        transacaoDiv.innerHTML = `
+            <div class="info">
+                <h4>${transacao.descricao}</h4>
+                <p>${transacao.tipo === "ganho" ? "Income" : "Expense"}</p>
+            </div>
+            <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
+                ${transacao.tipo === "ganho" ? "+" : "-"} ${transacao.valor}
+            </div>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
-        transactionList.appendChild(li);
+
+        transactionList.appendChild(transacaoDiv);
+
+        if (transacao.tipo === "ganho") {
+            totalIncome += transacao.valor;
+        } else {
+            totalExpenses += transacao.valor;
+        }
     });
+
+    document.getElementById("total-income").innerText = totalIncome;
+    document.getElementById("total-expenses").innerText = totalExpenses;
+    document.getElementById("total-balance").innerText = totalIncome - totalExpenses;
 }
 
-// Remove uma transação
-function removeTransaction(id) {
-    transactions = transactions.filter(transaction => transaction.id !== id);
-    renderTransactions();
-    updateBalance();
-}
-
-// Evento para adicionar uma nova transação
-form.addEventListener('submit', addTransaction);
+// Carrega as transações ao iniciar o aplicativo
+carregarTransacoes();
