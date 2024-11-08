@@ -122,8 +122,7 @@ function removerTransacao(id) {
     fecharDetalhePopup(); // Fecha o pop-up de detalhes, se estiver aberto
 }
 
-// Função para atualizar a lista de transações exibida
-function atualizarTransacoes() {
+
 
 
 // Função para exibir detalhes de uma transação no pop-up
