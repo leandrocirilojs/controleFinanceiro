@@ -1,12 +1,11 @@
 /* Estilos gerais */
 body, html {
-    
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
+    align-items: center;
     height: 100vh;
     background-color: #f4f4f8;
 }
@@ -14,7 +13,7 @@ body, html {
 .container {
     margin-top: 6px;
     width: 100%;
-    max-width: 800px;
+    max-width: 650px;
 }
 
 /* Cabeçalho de Saldo */
