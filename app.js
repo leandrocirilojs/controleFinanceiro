@@ -57,6 +57,7 @@ function removerTransacao(id) {
 }
 
 function atualizarTransacoes() {
+function atualizarTransacoes() {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
 
@@ -77,8 +78,8 @@ function atualizarTransacoes() {
             <div class="valor ${transacao.tipo === "ganho" ? "positivo" : "negativo"}">
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
             </div>
-            <button onclick="verDetalhesTransacao(${transacao.id})">Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})">X</button>
+            <button class="ver-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
