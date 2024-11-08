@@ -39,47 +39,48 @@
         <button class="botao-adicionar" onclick="abrirPopup()">+</button>
     </div>
 
-<!-- Pop-up para cadastrar transação -->
-<div id="popup" class="popup">
-    <div class="popup-content">
-        <span class="close" onclick="fecharPopup()">&times;</span>
-        <h2>Adicionar Transação</h2>
-        <label>Descrição:</label>
-        <input type="text" id="descricao">
-        
-        <label>Valor:</label>
-        <input type="number" id="valor">
-        
-        <label>Tipo:</label>
-        <select id="tipo">
-            <option value="ganho">Ganho</option>
-            <option value="despesa">Despesa</option>
-        </select>
-        
-        <label>Data:</label>
-        <input type="date" id="data">
-        
-        <label>Status de Pagamento:</label>
-        <select id="status">
-            <option value="pago">Pago</option>
-            <option value="nao-pago">Não Pago</option>
-        </select>
-        
-        <button onclick="adicionarTransacao()">Cadastrar</button>
+    <!-- Pop-up para cadastrar transação -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="fecharPopup()">&times;</span>
+            <h2>Adicionar Transação</h2>
+            <label>Descrição:</label>
+            <input type="text" id="descricao">
+            <label>Valor:</label>
+            <input type="number" id="valor">
+            <label>Tipo:</label>
+            <select id="tipo">
+                <option value="ganho">Ganho</option>
+                <option value="despesa">Despesa</option>
+            </select>
+            <button onclick="adicionarTransacao()">Cadastrar</button>
+        </div>
+    </div>
+
+    <!-- Lista de Transações com botão "Ver Detalhes" -->
+<div id="transaction-list">
+    <!-- Exemplo de transação adicionada dinamicamente -->
+    <div class="transacao">
+        <div class="info">
+            <h4>Descrição da Transação</h4>
+            <p>Tipo: Ganho/Despesa</p>
+        </div>
+        <div class="valor positivo">+ R$ 500,00</div>
+        <button onclick="verDetalhesTransacao(transacaoID)">Ver Detalhes</button>
     </div>
 </div>
 
 <!-- Pop-up de Detalhamento da Transação -->
-<!-- Pop-up para visualizar detalhes da transação -->
-<div id="detalhes-popup" class="popup">
+<div id="detalhe-popup" class="popup">
     <div class="popup-content">
-        <span class="close" onclick="fecharDetalhesPopup()">&times;</span>
+        <span class="close" onclick="fecharDetalhePopup()">&times;</span>
         <h2>Detalhes da Transação</h2>
-        <p><strong>Descrição:</strong> <span id="detalhes-descricao"></span></p>
-        <p><strong>Valor:</strong> <span id="detalhes-valor"></span></p>
-        <p><strong>Tipo:</strong> <span id="detalhes-tipo"></span></p>
-        <p><strong>Data:</strong> <span id="detalhes-data"></span></p>
-        <p><strong>Status:</strong> <span id="detalhes-status"></span></p>
+        <p><strong>Descrição:</strong> <span id="detalhe-descricao"></span></p>
+        <p><strong>Valor:</strong> <span id="detalhe-valor"></span></p>
+        <p><strong>Tipo:</strong> <span id="detalhe-tipo"></span></p>
+        <p><strong>Data:</strong> <span id="detalhe-data"></span></p>
+        <button onclick="editarTransacao()">Editar</button>
+        <button onclick="removerTransacao(detalheTransacaoID)">Remover</button>
     </div>
 </div>
 
