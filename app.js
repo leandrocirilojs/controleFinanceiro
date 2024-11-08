@@ -128,7 +128,7 @@ function verDetalhesTransacao(id) {
         detalheTransacaoID = id;
         document.getElementById("detalhe-popup").style.display = "flex";
     } else {
-        console.error("Transação não encontrada!");
+        alert("Transação não encontrada!");
     }
 }
 
