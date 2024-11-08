@@ -116,7 +116,7 @@ function atualizarTransacoes() {
 
 // Função para exibir detalhes de uma transação no pop-up
 function verDetalhesTransacao(id) {
-    alert("Funcionando")
+    
     const transacao = transactions.find(t => t.id === id);
     if (transacao) {
         // Carregar detalhes da transação no pop-up
