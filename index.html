@@ -39,6 +39,7 @@
         <button class="botao-adicionar" onclick="abrirPopup()">+</button>
     </div>
 <!-- Pop-up para cadastrar transação -->
+<!-- Pop-up para cadastrar transação -->
 <div id="popup" class="popup">
     <div class="popup-content">
         <span class="close" onclick="fecharPopup()">&times;</span>
@@ -56,9 +57,15 @@
             <option value="despesa">Despesa</option>
         </select>
 
-        <!-- Novo campo para data de pagamento -->
         <label>Data de Pagamento:</label>
         <input type="date" id="data-pagamento">
+
+        <!-- Novo campo para status de pagamento -->
+        <label>Status de Pagamento:</label>
+        <select id="status-pagamento">
+            <option value="não pago">Não Pago</option>
+            <option value="pago">Pago</option>
+        </select>
 
         <button onclick="adicionarTransacao()">Cadastrar</button>
     </div>
