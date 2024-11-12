@@ -236,13 +236,13 @@ body, html {
 
 
 .filtro-data {
-    width: 20px;
+    
     background-color: #f4f4f8;
     padding: 6px;
-    margin-bottom: 15px;
+    margin: 4px;
     border-radius: 10px;
     display: flex;
-    gap: 10px;
+    gap: 6px;
     align-items: center;
 }
 
