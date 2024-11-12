@@ -92,7 +92,7 @@ function atualizarTransacoes() {
                 ${transacao.tipo === "ganho" ? "+" : "-"} ${formatarMoeda(transacao.valor)}
             </div>
             <button class="ver-detalhes" onclick="verDetalhesTransacao(${transacao.id})">Ver Detalhes</button>
-            <button class="remover" onclick="removerTransacao(${transacao.id})">Remover</button>
+            <button class="remover" onclick="removerTransacao(${transacao.id})">X</button>
         `;
 
         transactionList.appendChild(transacaoDiv);
