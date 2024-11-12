@@ -230,3 +230,39 @@ body, html {
 .popup.show {
     display: flex; /* Mostra o pop-up */
 }
+
+
+
+.filtro-data {
+    background-color: #f4f4f8;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtro-data label {
+    font-size: 0.9em;
+    color: #333;
+}
+
+.filtro-data input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.filtro-data button {
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filtro-data button:hover {
+    background-color: #4500b5;
+}
