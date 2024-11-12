@@ -28,6 +28,46 @@ function fecharPopup() {
     document.getElementById("popup").style.display = "none";
 }
 
+
+
+
+
+
+
+function filtrarPorData() {
+    const dataInicial = document.getElementById("data-inicial").value;
+    const dataFinal = document.getElementById("data-final").value;
+
+    // Verifica se ambas as datas foram fornecidas
+    if (!dataInicial || !dataFinal) {
+        alert("Por favor, selecione ambas as datas para filtrar.");
+        return;
+    }
+
+    // Converte as datas para o formato comparável
+    const dataInicioObj = new Date(dataInicial);
+    const dataFimObj = new Date(dataFinal);
+
+    // Filtra as transações com base no intervalo de datas
+    const transacoesFiltradas = transactions.filter(transacao => {
+        const dataTransacao = new Date(transacao.dataPagamento);
+        return dataTransacao >= dataInicioObj && dataTransacao <= dataFimObj;
+    });
+
+    // Atualiza a lista de transações com as filtradas
+    atualizarTransacoes(transacoesFiltradas);
+}
+
+
+
+
+
+
+
+
+
+
+
 // Função para adicionar uma nova transação
 function adicionarTransacao() {
     const descricao = document.getElementById("descricao").value;
@@ -70,13 +110,14 @@ function adicionarTransacao() {
 
 
 function atualizarTransacoes() {
+function atualizarTransacoes(listaTransacoes = transactions) {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
 
     let totalIncome = 0;
     let totalExpenses = 0;
 
-    transactions.forEach((transacao) => {
+    listaTransacoes.forEach((transacao) => {
         const transacaoDiv = document.createElement("div");
         transacaoDiv.classList.add("transacao");
 
