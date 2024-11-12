@@ -109,7 +109,6 @@ function adicionarTransacao() {
 
 
 
-function atualizarTransacoes() {
 function atualizarTransacoes(listaTransacoes = transactions) {
     const transactionList = document.getElementById("transaction-list");
     transactionList.innerHTML = "";
