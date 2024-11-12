@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <style>
+/* Reset de estilo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos gerais */
+body {
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Cabeçalho com gradiente */
+.header {
+    background: linear-gradient(135deg, #6c63ff, #a288ff);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.header h1 {
+    font-size: 1.8em;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f5f7fa;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+    font-size: 0.9em;
+    color: #9e9e9e;
+    cursor: pointer;
+}
+
+.tab.active {
+    color: #6c63ff;
+    font-weight: bold;
+}
+
+/* Seção do gráfico */
+.chart-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.chart {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #e7e9fd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c63ff;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+/* Lista de transações */
+.transaction-list {
+    padding: 20px;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-icon {
+    display: flex;
+    align-items: center;
+}
+
+.transaction-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e7e9fd;
+    padding: 10px;
+    margin-right: 15px;
+}
+
+.transaction-details {
+    flex-grow: 1;
+}
+
+.transaction-details h3 {
+    font-size: 1em;
+    color: #333;
+}
+
+.transaction-details p {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.transaction-amount {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Menu inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #9e9e9e;
+    cursor: pointer;
+}
+
+.bottom-nav-item.active {
+    color: #6c63ff;
+}
+    
+  </style>
+
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="header">
+        <h1>Billing Reports</h1>
+    </div>
+    
+    <!-- Abas de navegação -->
+    <div class="tabs">
+        <div class="tab">March</div>
+        <div class="tab">April</div>
+        <div class="tab active">June</div>
+        <div class="tab">July</div>
+    </div>
+    
+    <!-- Seção do gráfico -->
+    <div class="chart-section">
+        <div class="chart">Total $9500</div>
+    </div>
+    
+    <!-- Lista de transações -->
+    <div class="transaction-list">
+        <div class="transaction">
+            <div class="transaction-icon">
+                <img src="icon-salary.png" alt="Salary">
+            </div>
+            <div class="transaction-details">
+                <h3>Salary</h3>
+                <p>1 transaction</p>
+            </div>
+            <div class="transaction-amount">$5000</div>
+        </div>
+        <div class="transaction">
+            <div class="transaction-icon">
+                <img src="icon-medicine.png" alt="Medicine">
+            </div>
+            <div class="transaction-details">
+                <h3>Medicine</h3>
+                <p>2 transactions</p>
+            </div>
+            <div class="transaction-amount">$2680</div>
+        </div>
+    </div>
+</div>
+
+<!-- Menu inferior fixo -->
+<div class="bottom-nav">
+    <div class="bottom-nav-item active">
+        <span>🏠</span>
+        <p>Home</p>
+    </div>
+    <div class="bottom-nav-item">
+        <span>📊</span>
+        <p>Graph</p>
+    </div>
+    <div class="bottom-nav-item">
+        <span>🔄</span>
+        <p>Transactions</p>
+    </div>
+    <div class="bottom-nav-item">
+        <span>⚙️</span>
+        <p>Settings</p>
+    </div>
+</div>
+
+</body>
+</html>
