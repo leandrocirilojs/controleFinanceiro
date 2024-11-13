@@ -1,55 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Bares</title>
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa com Mapbox</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Link para o CSS do Mapbox -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
-    <input type="text" id="search" placeholder="Digite sua localização" />
-    <button onclick="searchBars()">Buscar Bares</button>
-    <div id="map"></div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_arGXw2LdFvfRfR4nkW83_4u4FtKoy1k"></script>
-    <script>
-function initMap(lat, lng) {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat, lng },
-        zoom: 14,
+  <div id="map"></div>
+
+  <script>
+    // Substitua 'SEU_ACCESS_TOKEN' pela sua chave de API Mapbox
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGVvY3VsbGVuOTMiLCJhIjoiY20zZmRvMWt0MG90ZTJscHlkbTF0MWpzbCJ9.SNtvbbmx4PUlV97fqvro9w';
+
+    // Inicializando o mapa
+    var map = new mapboxgl.Map({
+      container: 'map', // ID do container (div) onde o mapa será renderizado
+      style: 'mapbox://styles/mapbox/streets-v11', // Estilo do mapa (pode ser alterado)
+      center: [-46.6333, -23.5505], // Posição inicial do mapa (longitude, latitude)
+      zoom: 12 // Zoom inicial
     });
 
-    const service = new google.maps.places.PlacesService(map);
-    const request = {
-        location: { lat, lng },
-        radius: 2000,
-        type: ['bar'],
-    };
+    // Adicionando um marcador no mapa
+    new mapboxgl.Marker()
+      .setLngLat([-46.6333, -23.5505])
+      .addTo(map);
+  </script>
 
-    service.nearbySearch(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            results.forEach(place => {
-                new google.maps.Marker({
-                    position: place.geometry.location,
-                    map,
-                    title: place.name,
-                });
-            });
-        }
-    });
-}
-
-function searchBars() {
-    navigator.geolocation.getCurrentPosition(position => {
-        const { latitude, longitude } = position.coords;
-        initMap(latitude, longitude);
-    });
-}
-</script>
 </body>
 </html>
