@@ -1,35 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa com Mapbox</title>
+  <title>Cadastro de Bares e Adegas</title>
   <link rel="stylesheet" href="style.css">
   <!-- Link para o CSS do Mapbox -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet" />
 </head>
 <body>
+  <style>
+    /* Definir altura do mapa */
+#map {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Estilo do formulário de cadastro */
+#form-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+#form-container input {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 200px;
+}
+
+#form-container button {
+  padding: 5px 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#form-container button:hover {
+  background-color: #0056b3;
+}
+  </style>
 
   <div id="map"></div>
 
+  <!-- Formulário para cadastrar novos bares/adegas -->
+  <div id="form-container">
+    <h3>Cadastro de Novo Local</h3>
+    <input type="text" id="name" placeholder="Nome do Local" />
+    <button id="add-location">Cadastrar</button>
+  </div>
+
   <script>
-    // Substitua 'SEU_ACCESS_TOKEN' pela sua chave de API Mapbox
-    mapboxgl.accessToken = 'pk.eyJ1IjoibGVvY3VsbGVuOTMiLCJhIjoiY20zZmRvMWt0MG90ZTJscHlkbTF0MWpzbCJ9.SNtvbbmx4PUlV97fqvro9w';
 
-    // Inicializando o mapa
-    var map = new mapboxgl.Map({
-      container: 'map', // ID do container (div) onde o mapa será renderizado
-      style: 'mapbox://styles/mapbox/streets-v11', // Estilo do mapa (pode ser alterado)
-      center: [-46.6333, -23.5505], // Posição inicial do mapa (longitude, latitude)
-      zoom: 12 // Zoom inicial
-    });
+    // Substitua pelo seu Access Token
+mapboxgl.accessToken = 'pk.eyJ1IjoibGVvY3VsbGVuOTMiLCJhIjoiY20zZmRvMWt0MG90ZTJscHlkbTF0MWpzbCJ9.SNtvbbmx4PUlV97fqvro9w';
 
-    // Adicionando um marcador no mapa
-    new mapboxgl.Marker()
-      .setLngLat([-46.6333, -23.5505])
-      .addTo(map);
+// Inicializando o mapa
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11', // Estilo do mapa
+  center: [-46.6333, -23.5505], // Posição inicial do mapa (São Paulo)
+  zoom: 12 // Zoom inicial
+});
+
+// Adicionar controle de geocodificação para buscar locais
+var geocoder = new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken,
+  mapboxgl: mapboxgl
+});
+map.addControl(geocoder);
+
+// Adicionar um marcador para um local específico
+var markers = []; // Para armazenar os locais cadastrados
+
+// Função para adicionar um marcador ao mapa
+function addMarker(lng, lat, name) {
+  const marker = new mapboxgl.Marker()
+    .setLngLat([lng, lat])
+    .setPopup(new mapboxgl.Popup().setHTML(`<h4>${name}</h4>`)) // Exibir o nome ao clicar no marcador
+    .addTo(map);
+  
+  markers.push({ lng, lat, name }); // Armazenar os dados do local
+}
+
+// Adicionar marcador ao clicar no mapa
+map.on('click', function (e) {
+  const coords = e.lngLat;
+  const name = prompt('Digite o nome do local:');
+  
+  if (name) {
+    addMarker(coords.lng, coords.lat, name);
+  }
+});
+
+// Adicionar um novo local via formulário
+document.getElementById('add-location').addEventListener('click', function () {
+  const name = document.getElementById('name').value;
+  
+  if (name) {
+    const coords = map.getCenter(); // Pega a localização central do mapa
+    addMarker(coords.lng, coords.lat, name); // Adiciona o marcador
+    document.getElementById('name').value = ''; // Limpa o campo de entrada
+  } else {
+    alert('Por favor, insira o nome do local.');
+  }
+});
   </script>
-
 </body>
 </html>
