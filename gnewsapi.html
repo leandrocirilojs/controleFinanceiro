@@ -123,7 +123,7 @@
                 articles.forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
-                    titulo.innerText  = 'currentQuery';
+                    titulo.innerText  = currentQuery;
                     newsItem.innerHTML = `
                         <h3>${article.title || 'Sem título'}</h3>
                         <p>${article.source.name ? 'Fonte: ' + article.source.name : 'Fonte desconhecida'}</p>
