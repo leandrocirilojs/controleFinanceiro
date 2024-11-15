@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,15 +46,25 @@
         .news-item a:hover {
             text-decoration: underline;
         }
+
+        #loading {
+            text-align: center;
+            margin: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Últimas Notícias de Programação</h1>
     <div id="news-container">Carregando...</div>
+    <div id="loading" style="display: none;">Carregando mais notícias...</div>
 
     <script>
+        let page = 0; // Página inicial
+        let isLoading = false; // Impede chamadas duplicadas à API
+
         async function fetchProgrammingNews() {
-            const apiUrl = 'https://hn.algolia.com/api/v1/search?query=programming&tags=story';
+            const apiUrl = `https://hn.algolia.com/api/v1/search?query=programming&tags=story&page=${page}`;
 
             try {
                 const response = await fetch(apiUrl);
@@ -65,16 +75,18 @@
                 const data = await response.json();
                 
                 const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = ''; // Limpa o container
-
-                // Exibir até 10 artigos ou todos os disponíveis
-                const articles = data.hits;
-                if (articles.length === 0) {
-                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
+                if (page === 0) {
+                    newsContainer.innerHTML = ''; // Limpa o container na primeira carga
                 }
 
-                // Mostrar até 10 notícias, ou menos se a API retornar menos
-                articles.slice(0, 10).forEach(article => {
+                // Exibir notícias da página atual
+                const articles = data.hits;
+                if (articles.length === 0 && page === 0) {
+                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
+                    return;
+                }
+
+                articles.forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
                     
@@ -86,15 +98,39 @@
 
                     newsContainer.appendChild(newsItem);
                 });
+
+                isLoading = false; // Permite novas requisições após o carregamento
+
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
+                if (page === 0) {
+                    const newsContainer = document.getElementById('news-container');
+                    newsContainer.innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
+                }
+                isLoading = false;
             }
         }
 
-        // Chamar a função ao carregar a página
-        window.onload = fetchProgrammingNews;
+        // Função para detectar o fim da página e carregar mais notícias
+        function handleScroll() {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            
+            // Verifica se o usuário está no fim da página
+            if (scrollTop + clientHeight >= scrollHeight - 5 && !isLoading) {
+                isLoading = true; // Impede chamadas duplicadas
+                page++; // Incrementa a página
+                document.getElementById('loading').style.display = 'block';
+                fetchProgrammingNews().then(() => {
+                    document.getElementById('loading').style.display = 'none';
+                });
+            }
+        }
+
+        // Chamar a função para carregar as primeiras notícias
+        fetchProgrammingNews();
+
+        // Adicionar um event listener para rolagem
+        window.addEventListener('scroll', handleScroll);
     </script>
 </body>
 </html>
