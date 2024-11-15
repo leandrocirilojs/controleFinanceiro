@@ -54,7 +54,6 @@
 
     <script>
         async function fetchProgrammingNews() {
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
             const apiUrl = 'https://hn.algolia.com/api/v1/search?query=programming&tags=story';
 
             try {
@@ -68,18 +67,19 @@
                 const newsContainer = document.getElementById('news-container');
                 newsContainer.innerHTML = ''; // Limpa o container
 
-                // Filtrar e exibir os primeiros 5 artigos de programação
-                const articles = data.hits.slice(0, 5);
+                // Exibir até 10 artigos ou todos os disponíveis
+                const articles = data.hits;
                 if (articles.length === 0) {
                     newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
                 }
 
-                articles.forEach(article => {
+                // Mostrar até 10 notícias, ou menos se a API retornar menos
+                articles.slice(0, 10).forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
                     
                     newsItem.innerHTML = `
-                        <h3>${article.title}</h3>
+                        <h3>${article.title || 'Sem título'}</h3>
                         <p>${article.author ? 'Autor: ' + article.author : 'Autor desconhecido'}</p>
                         <a href="${article.url}" target="_blank">Leia mais</a>
                     `;
