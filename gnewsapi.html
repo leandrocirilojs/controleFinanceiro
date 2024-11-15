@@ -119,6 +119,7 @@
                     newsItem.innerHTML = `
                         <h3>${article.title}</h3>
                         <p>${article.source.name}</p>
+                        <img src="${article.source.image}"/>
                         <a href="${article.url}" target="_blank">Leia mais</a>
                     `;
                     newsContainer.appendChild(newsItem);
