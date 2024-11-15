@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias de Programação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #news-container {
+            margin-top: 20px;
+        }
+
+        .news-item {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-item h3 {
+            margin: 0;
+            color: #0073e6;
+        }
+
+        .news-item p {
+            color: #666;
+        }
+
+        .news-item a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+
+        #loading {
+            text-align: center;
+            margin: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Últimas Notícias de Programação</h1>
+    <div id="news-container">Carregando...</div>
+    <div id="loading" style="display: none;">Carregando mais notícias...</div>
+
+    <script>
+        let page = 1; // Página inicial
+        let isLoading = false; // Impede chamadas duplicadas à API
+        const apiKey = 'YOUR_API_KEY'; // Substitua pela sua API Key do GNews
+
+        async function fetchProgrammingNews() {
+            const apiUrl = `https://gnews.io/api/v4/search?q=programação&lang=pt&country=br&token=${apiKey}&page=${page}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro na resposta da API: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                const newsContainer = document.getElementById('news-container');
+                if (page === 1) {
+                    newsContainer.innerHTML = ''; // Limpa o container na primeira carga
+                }
+
+                // Exibir notícias da página atual
+                const articles = data.articles;
+                if (articles.length === 0 && page === 1) {
+                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
+                    return;
+                }
+
+                articles.forEach(article => {
+                    const newsItem = document.createElement('div');
+                    newsItem.classList.add('news-item');
+                    
+                    newsItem.innerHTML = `
+                        <h3>${article.title || 'Sem título'}</h3>
+                        <p>${article.source.name ? 'Fonte: ' + article.source.name : 'Fonte desconhecida'}</p>
+                        <a href="${article.url}" target="_blank">Leia mais</a>
+                    `;
+
+                    newsContainer.appendChild(newsItem);
+                });
+
+                isLoading = false; // Permite novas requisições após o carregamento
+
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+                if (page === 1) {
+                    const newsContainer = document.getElementById('news-container');
+                    newsContainer.innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
+                }
+                isLoading = false;
+            }
+        }
+
+        // Função para detectar o fim da página e carregar mais notícias
+        function handleScroll() {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            
+            // Verifica se o usuário está no fim da página
+            if (scrollTop + clientHeight >= scrollHeight - 5 && !isLoading) {
+                isLoading = true; // Impede chamadas duplicadas
+                page++; // Incrementa a página
+                document.getElementById('loading').style.display = 'block';
+                fetchProgrammingNews().then(() => {
+                    document.getElementById('loading').style.display = 'none';
+                });
+            }
+        }
+
+        // Chamar a função para carregar as primeiras notícias
+        fetchProgrammingNews();
+
+        // Adicionar um event listener para rolagem
+        window.addEventListener('scroll', handleScroll);
+    </script>
+</body>
+</html>
