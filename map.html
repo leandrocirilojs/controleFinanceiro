@@ -50,34 +50,46 @@
 </head>
 <body>
     <h1>Últimas Notícias de Programação</h1>
-    <div id="news-container"></div>
+    <div id="news-container">Carregando...</div>
 
     <script>
         async function fetchProgrammingNews() {
-            const url = 'https://api.publicapis.org/entries?category=Programming'; // Exemplo de API pública
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const apiUrl = 'https://hn.algolia.com/api/v1/search?query=programming&tags=story';
+
             try {
-                const response = await fetch(url);
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro na resposta da API: ${response.status}`);
+                }
+
                 const data = await response.json();
                 
                 const newsContainer = document.getElementById('news-container');
                 newsContainer.innerHTML = ''; // Limpa o container
 
                 // Filtrar e exibir os primeiros 5 artigos de programação
-                const articles = data.entries.slice(0, 5);
+                const articles = data.hits.slice(0, 5);
+                if (articles.length === 0) {
+                    newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
+                }
+
                 articles.forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
                     
                     newsItem.innerHTML = `
-                        <h3>${article.API}</h3>
-                        <p>${article.Description}</p>
-                        <a href="${article.Link}" target="_blank">Leia mais</a>
+                        <h3>${article.title}</h3>
+                        <p>${article.author ? 'Autor: ' + article.author : 'Autor desconhecido'}</p>
+                        <a href="${article.url}" target="_blank">Leia mais</a>
                     `;
 
                     newsContainer.appendChild(newsItem);
                 });
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
             }
         }
 
