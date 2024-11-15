@@ -173,7 +173,7 @@
                     newsItem.innerHTML = `
                         <h3>${article.title}</h3>
                         <p>${article.source.name}</p>
-                        <button onclick="openModal('${article.title}', '${article.description}', '${article.url}')">Leia mais</button>
+                        <button onclick="openModal('${article.title}', '${article.description}', '${article.content}')">Leia mais</button>
                     `;
                     newsContainer.appendChild(newsItem);
                 });
