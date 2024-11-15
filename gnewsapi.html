@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias</title>
+    <title>Notícias de Programação</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,31 +89,31 @@
 
         #modal-content {
             background-color: white;
-            padding: 20px;
+            padding: 0;
             border-radius: 10px;
-            max-width: 600px;
-            width: 90%;
+            max-width: 90%;
             max-height: 80%;
-            overflow-y: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        #modal h2 {
-            margin-top: 0;
-            color: #0073e6;
-        }
-
-        #modal p {
-            color: #333;
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            flex-grow: 1;
         }
 
         #close-modal {
-            margin-top: 15px;
             background-color: #ff4d4d;
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 8px;
             cursor: pointer;
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #ccc;
         }
 
         #close-modal:hover {
@@ -129,7 +129,7 @@
     </style>
 </head>
 <body>
-    <h1 id="search-title">Notícias</h1>
+    <h1 id="search-title">Notícias de Programação</h1>
 
     <!-- Formulário para busca -->
     <form id="search-form">
@@ -140,12 +140,10 @@
     <div id="news-container"></div>
     <div id="loading">Carregando mais notícias...</div>
 
-    <!-- Modal para exibir o conteúdo da notícia -->
+    <!-- Modal para exibir a notícia completa -->
     <div id="modal">
         <div id="modal-content">
-            <h2 id="modal-title"></h2>
-            <p id="modal-description"></p>
-            <a id="modal-link" href="#" target="_blank">Leia mais no site original</a>
+            <iframe id="news-iframe" src=""></iframe>
             <button id="close-modal">Fechar</button>
         </div>
     </div>
@@ -168,16 +166,12 @@
                 if (page === 1) newsContainer.innerHTML = '';
 
                 data.articles.forEach(article => {
-                    const encodedTitle = encodeURIComponent(article.title);
-                    const encodedDescription = encodeURIComponent(article.description || '');
-                    const encodedUrl = encodeURIComponent(article.url);
-                    
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
                     newsItem.innerHTML = `
                         <h3>${article.title}</h3>
                         <p>${article.source.name}</p>
-                        <button onclick="openModal('${encodedTitle}', '${encodedDescription}', '${encodedUrl}')">Leia mais</button>
+                        <button onclick="openModal('${article.url}')">Leia mais</button>
                     `;
                     newsContainer.appendChild(newsItem);
                 });
@@ -191,21 +185,17 @@
             }
         }
 
-        // Função para abrir o modal com os detalhes da notícia
-        function openModal(encodedTitle, encodedDescription, encodedUrl) {
-            const title = decodeURIComponent(encodedTitle);
-            const description = decodeURIComponent(encodedDescription);
-            const url = decodeURIComponent(encodedUrl);
-
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-description').textContent = description;
-            document.getElementById('modal-link').href = url;
+        // Função para abrir o modal com a notícia completa
+        function openModal(url) {
+            const iframe = document.getElementById('news-iframe');
+            iframe.src = url;
             document.getElementById('modal').style.display = 'flex';
         }
 
         // Função para fechar o modal
         document.getElementById('close-modal').addEventListener('click', function () {
             document.getElementById('modal').style.display = 'none';
+            document.getElementById('news-iframe').src = ''; // Limpa o conteúdo do iframe
         });
 
         // Função para buscar com base no input
