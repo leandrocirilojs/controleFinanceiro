@@ -141,7 +141,7 @@
             const searchInput = document.getElementById('search-input').value.trim();
             if (searchInput) {
                 currentQuery = searchInput;
-                page = 1;
+                page = 1; // Resetar a página para 1 ao iniciar uma nova busca
                 fetchNews(currentQuery);
             }
         });
