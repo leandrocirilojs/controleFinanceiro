@@ -119,6 +119,13 @@
         #close-modal:hover {
             background-color: #e60000;
         }
+
+        #loading {
+            text-align: center;
+            margin: 20px;
+            font-weight: bold;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -130,7 +137,8 @@
         <button type="submit">Buscar</button>
     </form>
 
-    <div id="news-container">Carregando...</div>
+    <div id="news-container"></div>
+    <div id="loading">Carregando mais notícias...</div>
 
     <!-- Modal para exibir o conteúdo da notícia -->
     <div id="modal">
@@ -146,6 +154,7 @@
         let page = 1;
         let currentQuery = 'programação';
         const apiKey = '35c3cdade3bdc0832a425a58a8318194';
+        let isLoading = false;
 
         async function fetchNews(query) {
             const apiUrl = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt&country=br&token=${apiKey}&max=10&page=${page}`;
@@ -168,9 +177,13 @@
                     `;
                     newsContainer.appendChild(newsItem);
                 });
+
+                isLoading = false;
+                document.getElementById('loading').style.display = 'none';
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
-                document.getElementById('news-container').innerHTML = '<p>Erro ao carregar notícias.</p>';
+                isLoading = false;
+                document.getElementById('loading').style.display = 'none';
             }
         }
 
@@ -194,6 +207,16 @@
             if (searchInput) {
                 currentQuery = searchInput;
                 page = 1;
+                fetchNews(currentQuery);
+            }
+        });
+
+        // Função para carregar mais notícias ao rolar a página
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isLoading) {
+                isLoading = true;
+                page++;
+                document.getElementById('loading').style.display = 'block';
                 fetchNews(currentQuery);
             }
         });
