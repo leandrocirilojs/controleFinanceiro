@@ -129,7 +129,7 @@
     </style>
 </head>
 <body>
-    <h1 id="search-title">Notícias</h1>
+    <h1 id="search-title">Notícias de Programação</h1>
 
     <!-- Formulário para busca -->
     <form id="search-form">
@@ -168,12 +168,16 @@
                 if (page === 1) newsContainer.innerHTML = '';
 
                 data.articles.forEach(article => {
+                    const encodedTitle = encodeURIComponent(article.title);
+                    const encodedDescription = encodeURIComponent(article.description || '');
+                    const encodedUrl = encodeURIComponent(article.url);
+                    
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
                     newsItem.innerHTML = `
                         <h3>${article.title}</h3>
                         <p>${article.source.name}</p>
-                        <button onclick="openModal('${article.title}', '${article.description}', '${article.content}')">Leia mais</button>
+                        <button onclick="openModal('${encodedTitle}', '${encodedDescription}', '${encodedUrl}')">Leia mais</button>
                     `;
                     newsContainer.appendChild(newsItem);
                 });
@@ -188,7 +192,11 @@
         }
 
         // Função para abrir o modal com os detalhes da notícia
-        function openModal(title, description, url) {
+        function openModal(encodedTitle, encodedDescription, encodedUrl) {
+            const title = decodeURIComponent(encodedTitle);
+            const description = decodeURIComponent(encodedDescription);
+            const url = decodeURIComponent(encodedUrl);
+
             document.getElementById('modal-title').textContent = title;
             document.getElementById('modal-description').textContent = description;
             document.getElementById('modal-link').href = url;
