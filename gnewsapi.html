@@ -15,6 +15,30 @@
             color: #333;
         }
 
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
         #news-container {
             margin-top: 20px;
         }
@@ -55,17 +79,26 @@
     </style>
 </head>
 <body>
-    <h1>Últimas Notícias de Programação</h1>
+    <h1>Notícias de Programação</h1>
+
+    <!-- Formulário para busca personalizada -->
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Digite um tema para buscar..." required>
+        <button type="submit">Buscar</button>
+    </form>
+
     <div id="news-container">Carregando...</div>
     <div id="loading" style="display: none;">Carregando mais notícias...</div>
 
     <script>
-        let page = 1; // Página inicial
-        let isLoading = false; // Impede chamadas duplicadas à API
+        let page = 1;
+        let isLoading = false;
+        let currentQuery = 'programação'; // Valor padrão de busca
         const apiKey = '35c3cdade3bdc0832a425a58a8318194'; // Substitua pela sua API Key do GNews
 
-        async function fetchProgrammingNews() {
-            const apiUrl = `https://gnews.io/api/v4/search?q=programação&lang=pt&country=br&token=${apiKey}&page=${page}`;
+        // Função para buscar notícias
+        async function fetchProgrammingNews(query) {
+            const apiUrl = `https://gnews.io/api/v4/search?q=${encodeURIComponent(query)}&lang=pt&country=br&token=${apiKey}&page=${page}`;
 
             try {
                 const response = await fetch(apiUrl);
@@ -80,7 +113,6 @@
                     newsContainer.innerHTML = ''; // Limpa o container na primeira carga
                 }
 
-                // Exibir notícias da página atual
                 const articles = data.articles;
                 if (articles.length === 0 && page === 1) {
                     newsContainer.innerHTML = '<p>Nenhuma notícia encontrada.</p>';
@@ -100,13 +132,12 @@
                     newsContainer.appendChild(newsItem);
                 });
 
-                isLoading = false; // Permite novas requisições após o carregamento
+                isLoading = false;
 
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
                 if (page === 1) {
-                    const newsContainer = document.getElementById('news-container');
-                    newsContainer.innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
+                    document.getElementById('news-container').innerHTML = '<p>Não foi possível carregar as notícias. Tente novamente mais tarde.</p>';
                 }
                 isLoading = false;
             }
@@ -116,21 +147,32 @@
         function handleScroll() {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
             
-            // Verifica se o usuário está no fim da página
             if (scrollTop + clientHeight >= scrollHeight - 5 && !isLoading) {
-                isLoading = true; // Impede chamadas duplicadas
-                page++; // Incrementa a página
+                isLoading = true;
+                page++;
                 document.getElementById('loading').style.display = 'block';
-                fetchProgrammingNews().then(() => {
+                fetchProgrammingNews(currentQuery).then(() => {
                     document.getElementById('loading').style.display = 'none';
                 });
             }
         }
 
-        // Chamar a função para carregar as primeiras notícias
-        fetchProgrammingNews();
+        // Event listener para o formulário de busca
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchInput = document.getElementById('search-input').value.trim();
+            
+            if (searchInput) {
+                currentQuery = searchInput; // Atualizar o termo de busca
+                page = 1; // Resetar a página para a busca
+                fetchProgrammingNews(currentQuery);
+            }
+        });
 
-        // Adicionar um event listener para rolagem
+        // Carregar notícias iniciais
+        fetchProgrammingNews(currentQuery);
+
+        // Adicionar event listener para rolagem
         window.addEventListener('scroll', handleScroll);
     </script>
 </body>
