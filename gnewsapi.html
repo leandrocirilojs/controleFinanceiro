@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias de Programação</title>
+    <title>Busque</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,7 +79,7 @@
     </style>
 </head>
 <body>
-    <h1>Notícias de Programação</h1>
+    <h1 id="titulo"></h1>
 
     <!-- Formulário para busca personalizada -->
     <form id="search-form">
@@ -91,6 +91,7 @@
     <div id="loading" style="display: none;">Carregando mais notícias...</div>
 
     <script>
+        let titulo = document.getElementById("titulo");
         let page = 1;
         let isLoading = false;
         let currentQuery = 'programação'; // Valor padrão de busca
@@ -122,7 +123,7 @@
                 articles.forEach(article => {
                     const newsItem = document.createElement('div');
                     newsItem.classList.add('news-item');
-                    
+                    titulo.innerText  = 'currentQuery';
                     newsItem.innerHTML = `
                         <h3>${article.title || 'Sem título'}</h3>
                         <p>${article.source.name ? 'Fonte: ' + article.source.name : 'Fonte desconhecida'}</p>
