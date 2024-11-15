@@ -89,10 +89,9 @@
 
         #modal-content {
             background-color: white;
-            padding: 0;
             border-radius: 10px;
-            max-width: 90%;
-            max-height: 80%;
+            width: 80%;
+            height: 80%;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -109,11 +108,9 @@
             background-color: #ff4d4d;
             color: white;
             border: none;
-            padding: 8px;
+            padding: 10px;
             cursor: pointer;
-            width: 100%;
             text-align: center;
-            border-top: 1px solid #ccc;
         }
 
         #close-modal:hover {
@@ -143,8 +140,8 @@
     <!-- Modal para exibir a notícia completa -->
     <div id="modal">
         <div id="modal-content">
-            <iframe id="news-iframe" src=""></iframe>
             <button id="close-modal">Fechar</button>
+            <iframe id="news-iframe"></iframe>
         </div>
     </div>
 
