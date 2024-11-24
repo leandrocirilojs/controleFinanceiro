@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Josilson Lobo - Músico</title>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Font Awesome -->
   <style>
     /* Base Styling */
     body {
@@ -71,10 +71,6 @@
       text-align: center;
     }
 
-    .settings p {
-      margin: 0;
-    }
-
     /* Main Content */
     .main-content {
       margin-left: 250px;
@@ -117,58 +113,6 @@
       margin: 20px 0;
     }
 
-    .cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background-color: #21262d;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      color: #58a6ff;
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .card i {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .contact-form {
-      background-color: #21262d;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #161b22;
-      color: #c9d1d9;
-    }
-
-    .contact-form button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      background-color: #58a6ff;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .contact-form button:hover {
-      background-color: #4691cc;
-    }
-
     /* Responsive Design */
     @media (max-width: 768px) {
       .sidebar {
@@ -176,10 +120,6 @@
       }
 
       .main-content {
-        margin-left: 0;
-      }
-
-      .main-content.expanded {
         margin-left: 0;
       }
 
@@ -205,7 +145,7 @@
   </div>
   <div class="main-content">
     <header>
-      <i class="fas fa-bars menu-btn"></i>
+      <i class="fas fa-bars menu-btn"></i> <!-- Ícone do menu hambúrguer -->
       <h2><i class="fas fa-star"></i> Bem-vindo ao site oficial</h2>
       <div class="user-info">
         <i class="fas fa-guitar"></i> Músico & Compositor
@@ -243,17 +183,6 @@
           <h4>Festival de Música - Rio</h4>
           <p>Data: 20/01/2025</p>
         </div>
-      </div>
-    </div>
-    <div class="section">
-      <h3>Entre em Contato</h3>
-      <div class="contact-form">
-        <form>
-          <input type="text" placeholder="Seu Nome" required>
-          <input type="email" placeholder="Seu Email" required>
-          <textarea rows="4" placeholder="Sua Mensagem" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
       </div>
     </div>
   </div>
