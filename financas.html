@@ -130,7 +130,7 @@
   </style>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar hidden">
     <h1>Josilson Lobo</h1>
     <nav>
       <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
@@ -189,11 +189,9 @@
   <script>
     const menuBtn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
 
     menuBtn.addEventListener('click', () => {
       sidebar.classList.toggle('hidden');
-      mainContent.classList.toggle('expanded');
     });
   </script>
 </body>
