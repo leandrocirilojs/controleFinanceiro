@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
+  <title>Josilson Lobo - Músico</title>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     /* Base Styling */
     body {
@@ -27,6 +26,7 @@
 
     .sidebar h1 {
       color: #58a6ff;
+      text-align: center;
     }
 
     .sidebar nav {
@@ -55,16 +55,11 @@
       position: absolute;
       bottom: 20px;
       color: #8b949e;
+      text-align: center;
     }
 
     .settings p {
       margin: 0;
-    }
-
-    .settings a {
-      color: #58a6ff;
-      text-decoration: none;
-      font-size: 14px;
     }
 
     /* Main Content */
@@ -91,10 +86,13 @@
       gap: 10px;
     }
 
+    .section {
+      margin: 20px 0;
+    }
+
     .cards {
       display: flex;
       gap: 20px;
-      margin: 20px 0;
       flex-wrap: wrap;
     }
 
@@ -102,31 +100,46 @@
       background-color: #21262d;
       padding: 20px;
       border-radius: 10px;
-      width: 150px;
       text-align: center;
       color: #58a6ff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      flex: 1;
+      min-width: 200px;
     }
 
     .card i {
       font-size: 24px;
+      margin-bottom: 10px;
     }
 
-    .analytics {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .chart {
+    .contact-form {
       background-color: #21262d;
       padding: 20px;
       border-radius: 10px;
-      flex: 1;
-      text-align: center;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #161b22;
+      color: #c9d1d9;
+    }
+
+    .contact-form button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #58a6ff;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover {
+      background-color: #4691cc;
     }
 
     /* Responsive Design */
@@ -140,97 +153,75 @@
       .main-content {
         margin-left: 0;
       }
-
-      .cards {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h2 {
-        font-size: 18px;
-      }
-
-      .card {
-        width: 100px;
-      }
-
-      .chart {
-        padding: 10px;
-      }
     }
   </style>
 </head>
 <body>
   <div class="sidebar">
-    <h1>Dashdark X</h1>
+    <h1>Josilson Lobo</h1>
     <nav>
-      <a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
-      <a href="#"><i class="fas fa-cogs"></i> Features</a>
-      <a href="#"><i class="fas fa-users"></i> Users</a>
-      <a href="#"><i class="fas fa-dollar-sign"></i> Pricing</a>
-      <a href="#"><i class="fas fa-plug"></i> Integrations</a>
+      <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="#"><i class="fas fa-music"></i> Discografia</a>
+      <a href="#"><i class="fas fa-calendar-alt"></i> Eventos</a>
+      <a href="#"><i class="fas fa-video"></i> Vídeos</a>
+      <a href="#"><i class="fas fa-envelope"></i> Contato</a>
     </nav>
     <div class="settings">
-      <p><i class="fas fa-user-circle"></i> John Carter</p>
-      <a href="#">Account Settings</a>
+      <p>© 2024 Josilson Lobo</p>
     </div>
   </div>
   <div class="main-content">
     <header>
-      <h2><i class="fas fa-chart-bar"></i> Analytics</h2>
+      <h2><i class="fas fa-star"></i> Bem-vindo ao site oficial</h2>
       <div class="user-info">
-        <i class="fas fa-user"></i> Mr. John
+        <i class="fas fa-guitar"></i> Músico & Compositor
       </div>
     </header>
-    <div class="cards">
-      <div class="card">
-        <i class="fas fa-save"></i>
-        <p>50.8K<br><span>Save Products</span></p>
-      </div>
-      <div class="card">
-        <i class="fas fa-box"></i>
-        <p>23.6K<br><span>Stock Products</span></p>
-      </div>
-      <div class="card">
-        <i class="fas fa-tags"></i>
-        <p>756<br><span>Sale Products</span></p>
-      </div>
-      <div class="card">
-        <i class="fas fa-dollar-sign"></i>
-        <p>2.3K<br><span>Average Revenue</span></p>
+    <div class="section">
+      <h3>Sobre Josilson Lobo</h3>
+      <p>Josilson Lobo é um talentoso músico e compositor com uma longa trajetória no cenário musical. Ele combina estilos únicos para criar músicas inesquecíveis.</p>
+    </div>
+    <div class="section">
+      <h3>Últimos Lançamentos</h3>
+      <div class="cards">
+        <div class="card">
+          <i class="fas fa-compact-disc"></i>
+          <h4>Álbum: Horizonte</h4>
+          <p>Data de lançamento: 15/10/2024</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-music"></i>
+          <h4>Single: Noite Estrelada</h4>
+          <p>Data de lançamento: 05/11/2024</p>
+        </div>
       </div>
     </div>
-    <section class="analytics">
-      <div class="chart">
-        <h3><i class="fas fa-chart-pie"></i> Website Visitors</h3>
-        <p>150k</p>
+    <div class="section">
+      <h3>Próximos Eventos</h3>
+      <div class="cards">
+        <div class="card">
+          <i class="fas fa-calendar-day"></i>
+          <h4>Show em São Paulo</h4>
+          <p>Data: 10/12/2024</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-calendar-day"></i>
+          <h4>Festival de Música - Rio</h4>
+          <p>Data: 20/01/2025</p>
+        </div>
       </div>
-      <div class="chart">
-        <h3><i class="fas fa-chart-bar"></i> Revenue by Customer Type</h3>
-        <canvas id="revenueChart"></canvas>
+    </div>
+    <div class="section">
+      <h3>Entre em Contato</h3>
+      <div class="contact-form">
+        <form>
+          <input type="text" placeholder="Seu Nome" required>
+          <input type="email" placeholder="Seu Email" required>
+          <textarea rows="4" placeholder="Sua Mensagem" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
       </div>
-    </section>
+    </div>
   </div>
-  <script>
-    const ctx = document.getElementById('revenueChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-        datasets: [{
-          label: 'Revenue',
-          data: [12000, 19000, 30000, 50000, 20000],
-          backgroundColor: ['#58a6ff'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
